@@ -12,6 +12,8 @@ retrofit = "2.9.0"
 hilt = "2.51"
 coroutines = "1.7.3"
 lifecycle = "2.8.7"
+moshi = "1.13.0"
+retroFitMoshi = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,11 +36,15 @@ lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versi
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+moshi = {module = "com.squareup.moshi:moshi", version.ref = "moshi"}
+moshi-kotlin = {module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi"}
+retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retroFitMoshi" }
 
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hiltAndroid = {id = "com.google.dagger.hilt.android", version.ref ="hilt"}
 
 
