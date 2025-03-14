@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -65,6 +66,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime)
     implementation(libs.coroutines)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.retrofit.moshi)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
