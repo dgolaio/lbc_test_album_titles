@@ -1,5 +1,10 @@
 package com.example.lbc_test_album_titles.di
 
+import com.example.lbc_test_album_titles.data.api.ApiService
+import com.example.lbc_test_album_titles.data.repository.AlbumTitlesRepository
+import com.example.lbc_test_album_titles.data.repository.impl.AlbumTitlesRepositoryImpl
+import com.example.lbc_test_album_titles.domain.usecase.GetAlbumItemUseCase
+import com.example.lbc_test_album_titles.domain.usecase.impl.GetAlbumItemUseCaseImpl
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -26,9 +31,31 @@ object AppModule {
     @Singleton
     fun provideRetrofit(moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://static.leboncoin.fr/img/shared/technical-test.json")
+            .baseUrl("https://static.leboncoin.fr/img/shared/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAPIService(retrofit: Retrofit) : ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(
+        apiService: ApiService
+    ) : AlbumTitlesRepository {
+        return AlbumTitlesRepositoryImpl(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCase(
+        repository: AlbumTitlesRepository
+    ) : GetAlbumItemUseCase {
+        return GetAlbumItemUseCaseImpl(repository)
     }
 
 }
