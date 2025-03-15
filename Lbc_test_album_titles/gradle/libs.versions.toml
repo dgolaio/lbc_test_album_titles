@@ -15,6 +15,7 @@ lifecycle = "2.8.7"
 moshi = "1.13.0"
 retroFitMoshi = "2.9.0"
 hiltNavigationCompose = "1.0.0"
+coilVers = "2.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +42,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 moshi = {module = "com.squareup.moshi:moshi", version.ref = "moshi"}
 moshi-kotlin = {module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi"}
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retroFitMoshi" }
+coil-image = { module = "io.coil-kt:coil-compose", version.ref = "coilVers" }
 
 
 

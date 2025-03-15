@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.retrofit.moshi)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.coil.image)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

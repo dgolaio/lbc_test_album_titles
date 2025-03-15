@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lbc_test_album_titles.compose.BaseScreen
 import com.example.lbc_test_album_titles.ui.theme.Lbc_test_album_titlesTheme
 import com.example.lbc_test_album_titles.viewmodel.AlbumTitlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,8 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Lbc_test_album_titlesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    BaseScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
