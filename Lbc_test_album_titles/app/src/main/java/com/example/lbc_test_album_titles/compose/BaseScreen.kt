@@ -11,17 +11,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.lbc_test_album_titles.viewmodel.AlbumTitlesViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun BaseScreen(modifier: Modifier = Modifier,  viewModel: AlbumTitlesViewModel = hiltViewModel()) {
     val albumItems by viewModel.albumItems.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
 
-    LazyColumn (modifier = modifier
-        .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background)
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+        onRefresh = { viewModel.loadAlbumTitles() }
     ) {
-        items(albumItems.size) { albumPos ->
-            AlbumItemCompose(albumTitle = albumItems.get(albumPos).title, imageUrl = albumItems.get(albumPos).imageUrl)
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            items(albumItems.size) { albumPos ->
+                AlbumItemCompose(
+                    albumTitle = albumItems.get(albumPos).title,
+                    imageUrl = albumItems.get(albumPos).imageUrl,
+                )
+            }
         }
     }
 }

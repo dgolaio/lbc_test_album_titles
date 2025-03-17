@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -71,6 +72,10 @@ dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.coil.image)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.accompanist.swiperefresh)
+    kapt(libs.room.compiler)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

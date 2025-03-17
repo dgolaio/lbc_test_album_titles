@@ -47,8 +47,8 @@ fun AlbumItemCompose(modifier: Modifier = Modifier, albumTitle: String, imageUrl
             Spacer(modifier = Modifier.height(20.dp))
             Box(modifier = Modifier.border(BorderStroke(2.dp, MaterialTheme.colorScheme.secondary))){
                 AsyncImage(model = imageUrl,
-                            contentDescription = "$albumTitle + Image",
-                            alignment = Alignment.Center)
+                           contentDescription = "$albumTitle + Image",
+                           alignment = Alignment.Center)
             }
         }
     }
