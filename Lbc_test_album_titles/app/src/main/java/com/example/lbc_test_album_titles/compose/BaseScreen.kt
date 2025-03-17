@@ -3,6 +3,7 @@ package com.example.lbc_test_album_titles.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,7 +18,7 @@ fun BaseScreen(modifier: Modifier = Modifier,  viewModel: AlbumTitlesViewModel =
 
     LazyColumn (modifier = modifier
         .fillMaxSize()
-        .background(Color.LightGray)
+        .background(MaterialTheme.colorScheme.background)
     ) {
         items(albumItems.size) { albumPos ->
             AlbumItemCompose(albumTitle = albumItems.get(albumPos).title, imageUrl = albumItems.get(albumPos).imageUrl)
