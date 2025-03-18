@@ -26,7 +26,9 @@ The project follows the **MVVM + Clean Architecture** pattern. The responsibilit
 - **DAO**: Access to the local database using Room.
 - **Database**: Room Database configuration.
 
-## Running the Project
+## Min API
+API 24
+
 
 ## Architecture Details
 
