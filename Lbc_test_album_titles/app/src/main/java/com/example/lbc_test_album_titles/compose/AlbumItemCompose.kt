@@ -22,6 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
+/**
+ * @author : Duarte Golaio
+ * @mailto : duarte_golaio@hotmail.com
+ * @created : 14/03/2025
+ **/
+
+/**
+ * Simple Album Item to Show Title and Image 600X600 of an Album
+ */
+
 @Composable
 fun AlbumItemCompose(modifier: Modifier = Modifier, albumTitle: String, imageUrl:String) {
     Box(modifier = modifier

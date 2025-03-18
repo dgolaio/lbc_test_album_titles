@@ -27,19 +27,19 @@ class GetAlbumItemUseCaseImplTest {
 
     @Test
     fun `when calling getAlbumItems must return albumList`() = runTest {
-        // Criamos uma lista de álbuns simulada
+        // Create the album List to Mock response
         val albumList = listOf(AlbumItem(1, 1, "Album Title","http:test.lbc","http:test_thumb.lbc"))
 
-        // Dizemos ao Mockito que quando chamarmos repository.getAlbumTitles(), deve retornar albumList
+        // Mock the response with the list above
         `when`(repository.getAlbumTitles()).thenReturn(flowOf(albumList))
 
-        // Executamos o Use Case
+        // Execute the function an get the first value (mocked)
         val result = useCase.getAlbumItems().first()
 
-        // Verificamos que repository.fetchAlbumTitles() foi chamado
+        // validate that the fetch Album was called at least once
         verify(repository).fetchAlbumTitles()
 
-        // Verificamos se o resultado retornado é igual ao esperado
+        // Validate that the values are equall
         assertEquals(albumList, result)
     }
 
@@ -47,16 +47,18 @@ class GetAlbumItemUseCaseImplTest {
     fun `when fetchAlbumTitles throws an exception, getAlbumItems should still return albumList`() = runTest {
         val albumList = listOf(AlbumItem(1, 1, "Album Title", "http:test.lbc", "http:test_thumb.lbc"))
 
-        // Simular erro ao tentar atualizar os álbuns
+        // emulate exception whe calling the repository function
         `when`(repository.fetchAlbumTitles()).thenThrow(RuntimeException("Network Error"))
 
-        // O banco de dados local ainda deve devolver os álbuns
+        // emulate that the dataBase sthill returns
+        //values
         `when`(repository.getAlbumTitles()).thenReturn(flowOf(albumList))
 
-        // Executamos o Use Case
+        // Execute the UseCase and get the first value
         val result = useCase.getAlbumItems().first()
 
-        // Verificamos se o resultado ainda é válido, mesmo com erro na atualização
+        // Validate that the values are still equal,
+        // even thought there was an exception in fetching new Albums
         assertEquals(albumList, result)
     }
 }

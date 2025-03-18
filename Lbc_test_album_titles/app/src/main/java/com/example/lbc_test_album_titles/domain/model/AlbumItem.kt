@@ -4,6 +4,18 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+
+/**
+ * @author : Duarte Golaio
+ * @mailto : duarte_golaio@hotmail.com
+ * @created : 14/03/2025
+ **/
+
+/**
+ * Data Class of an Album with JsonAnnotations to Moshi
+ * and Annotations to Room
+ */
+
 @Entity(tableName = "albums")
 @JsonClass(generateAdapter = true)
 data class AlbumItem(

@@ -20,6 +20,7 @@ class AlbumTitlesRepositoryImplTest {
 
     @Before
     fun setup() {
+        /* mocking with mockito all the necesary clases to tests */
         apiService = mock(ApiService::class.java)
         albumsDAO = mock(AlbumsDAO::class.java)
         repository = AlbumTitlesRepositoryImpl(apiService, albumsDAO)
@@ -27,44 +28,50 @@ class AlbumTitlesRepositoryImplTest {
 
     @Test
     fun `getAlbumTitles should return data from DAO`() = runTest {
-        // Simular uma lista de álbuns armazenados no Room
+
+        // Simulate a list of albums stored in Room
         val albumList = listOf(AlbumItem(1, 1, "Album Title", "http:test.lbc", "http:test_thumb.lbc"))
 
-        // Simular a resposta do DAO
+        // Simulate (albumsDAO.getAllAlbums()) the answer of the DAO
         `when`(albumsDAO.getAllAlbums()).thenReturn(flowOf(albumList))
 
-        // Executar o método do repositório
+        // execute repo method ( with DAO mocked values )
         val result = repository.getAlbumTitles().first()
 
-        // Verificar se o resultado corresponde ao esperado
+        // Assert that these values are equal ( the one we mocked
+        // into DAO and the one we got from the repo function
         assertEquals(albumList, result)
     }
 
     @Test
     fun `fetchAlbumTitles should fetch from API and store in DAO`() = runTest {
-        // Simular resposta da API
+
+        // Simulate a list of albums stored in Room
         val albumList = listOf(AlbumItem(1, 1, "Album Title", "http:test.lbc", "http:test_thumb.lbc"))
 
-        // Quando a API for chamada, retornar a lista simulada
+        // mock the return of the apiServices List
         `when`(apiService.getAlbumTitles()).thenReturn(albumList)
 
-        // Executar o método
+        // Exe the method to test
         repository.fetchAlbumTitles()
 
-        // Verificar se os métodos do DAO foram chamados corretamente
-        verify(albumsDAO).clearAlbums() // Deve limpar os álbuns antes de salvar novos
-        verify(albumsDAO).insertAlbums(albumList) // Deve inserir os novos álbuns
+        // Validate if both these methods were called at least
+        // once
+        verify(albumsDAO).clearAlbums()
+        verify(albumsDAO).insertAlbums(albumList)
     }
 
     @Test
     fun `fetchAlbumTitles should handle exceptions gracefully`() = runTest {
-        // Simular uma exceção na API
+        // Simulate the API CALL with Exception
         `when`(apiService.getAlbumTitles()).thenThrow(RuntimeException("API Error"))
 
-        // Executar o método
+        // Exe method
         repository.fetchAlbumTitles()
 
-        // Verificar que o DAO *não* tentou limpar ou salvar dados
+        // Since its thrown an exception,
+        // we validate that this DAO must not clean and insert
+        // any values
         verify(albumsDAO, never()).clearAlbums()
         verify(albumsDAO, never()).insertAlbums(anyList())
     }

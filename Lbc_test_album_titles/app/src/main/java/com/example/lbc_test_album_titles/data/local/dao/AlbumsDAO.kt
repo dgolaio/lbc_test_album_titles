@@ -7,6 +7,16 @@ import androidx.room.Query
 import com.example.lbc_test_album_titles.domain.model.AlbumItem
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * @author : Duarte Golaio
+ * @mailto : duarte_golaio@hotmail.com
+ * @created : 14/03/2025
+ **/
+
+/**
+ * Interface of DAO with access methods necesary to Room cache
+ */
+
 @Dao
 interface AlbumsDAO {
     @Query("SELECT * FROM albums")

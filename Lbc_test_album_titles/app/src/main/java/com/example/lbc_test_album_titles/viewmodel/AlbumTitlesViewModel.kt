@@ -11,12 +11,22 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * @author : Duarte Golaio
+ * @mailto : duarte_golaio@hotmail.com
+ * @created : 14/03/2025
+ **/
+
+/**
+ * ViewModel Class AlbumTitlesViewModel.
+ * A class to manage the two way bridge between de View and the model
+ * and its states
+ */
+
 @HiltViewModel
 class AlbumTitlesViewModel @Inject constructor(
     private val getAlbumItemUseCase: GetAlbumItemUseCase
 ) : ViewModel() {
-
-    //TODO: Prepare Tests; Prepare Documents
 
     private val _albumItems = MutableStateFlow<List<AlbumItem>>(arrayListOf())
     val albumItems: StateFlow<List<AlbumItem>> = _albumItems
@@ -24,11 +34,13 @@ class AlbumTitlesViewModel @Inject constructor(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing
 
+    /* Launch this at the initialization of the VM */
    init {
         loadAlbumTitles()
     }
 
     fun loadAlbumTitles() {
+        /* launch the coroutine */
         viewModelScope.launch {
             try {
                     _isRefreshing.value = true
@@ -38,7 +50,7 @@ class AlbumTitlesViewModel @Inject constructor(
                     _isRefreshing.value = false
                 }
             } catch (e:Exception) {
-                e.printStackTrace()
+                e.printStackTrace() // TODO: Manage posible error
             }
         }
     }

@@ -14,6 +14,17 @@ import com.example.lbc_test_album_titles.viewmodel.AlbumTitlesViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
+/**
+ * @author : Duarte Golaio
+ * @mailto : duarte_golaio@hotmail.com
+ * @created : 14/03/2025
+ **/
+
+/**
+ * A Base Screen with Column with to load with Album Items
+ * Added Library and SwipeRefresh Composable to apply Refresh funtion (and reload all the albums)
+ */
+
 @Composable
 fun BaseScreen(modifier: Modifier = Modifier,  viewModel: AlbumTitlesViewModel = hiltViewModel()) {
     val albumItems by viewModel.albumItems.collectAsState()

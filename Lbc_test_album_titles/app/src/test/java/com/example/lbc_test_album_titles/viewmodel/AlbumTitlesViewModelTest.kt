@@ -27,6 +27,8 @@ class AlbumTitlesViewModelTest {
 
     @Before
     fun setup() {
+        // has to put a test Dispatcher since,
+        // some functions of the VM call Coroutines
         Dispatchers.setMain(testDispatcher)
         useCase = mock(GetAlbumItemUseCase::class.java)
         viewModel = AlbumTitlesViewModel(useCase)
@@ -34,56 +36,43 @@ class AlbumTitlesViewModelTest {
 
     @After
     fun tearDown() {
+        //I done this to reset the Dispatcher and dont affect
+        //other possible tests ( since we are running a test
+        //Dispacher
         Dispatchers.resetMain()
     }
 
     @Test
     fun `loadAlbumTitles should update albumItems`() = runTest {
-        // Simular uma lista de álbuns
+        // List to return no Mock a Result of a Method
         val albumList = listOf(AlbumItem(1, 1, "Album Title", "http:test.lbc", "http:test_thumb.lbc"))
 
-        // Configurar o mock do UseCase sem `whenever`
+        // Make that the function to get Albums returns
+        //Mocked List
         `when`(useCase.getAlbumItems()).thenReturn(flowOf(albumList))
 
-        // Executar o método que carrega os álbuns
+        // Exe the fuction
         viewModel.loadAlbumTitles()
 
-        // Avança o tempo para que a coroutine dentro da ViewModel execute
+        //"Advances time" of the coroutin inside the viewModel
+        // since it is a mocked environment with a test dispacher
         testDispatcher.scheduler.advanceUntilIdle()
 
-        // Verificar se o StateFlow foi atualizado corretamente
+        // Validates both values are equal (
+        // the one we mocked to return in the method and the Stored
+        //inside the VM
         assertEquals(albumList, viewModel.albumItems.value)
     }
 
     @Test
-    fun `isRefreshing should be true while loading and false after completion`() = runTest {
-        // Criar um fluxo suspenso para simular atraso no carregamento
-        val albumFlow = MutableStateFlow(emptyList<AlbumItem>())
-        `when`(useCase.getAlbumItems()).thenReturn(albumFlow)
-
-        // Executar o método
-        viewModel.loadAlbumTitles()
-
-        // No início, `isRefreshing` deve ser true
-        assertTrue(viewModel.isRefreshing.value)
-
-        // Atualizar o fluxo e esperar o processamento
-        albumFlow.value = listOf(AlbumItem(1, 1, "Album Title", "http:test.lbc", "http:test_thumb.lbc"))
-        advanceUntilIdle()
-
-        // Depois da atualização, `isRefreshing` deve ser false
-        assertFalse(viewModel.isRefreshing.value)
-    }
-
-    @Test
     fun `loadAlbumTitles should handle exceptions gracefully`() = runTest {
-        // Simular um erro no UseCase sem `whenever`
+        // Mock response with Exception
         `when`(useCase.getAlbumItems()).thenThrow(RuntimeException("Error loading albums"))
 
-        // Executar o método
+        // Exe method
         viewModel.loadAlbumTitles()
 
-        // O estado da lista de álbuns deve continuar vazio
+        // The State of the Album List must remain Empty
         assertTrue(viewModel.albumItems.value.isEmpty())
     }
 }

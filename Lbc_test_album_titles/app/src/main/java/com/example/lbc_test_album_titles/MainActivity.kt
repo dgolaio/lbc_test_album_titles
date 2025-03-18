@@ -12,6 +12,10 @@ import com.example.lbc_test_album_titles.compose.BaseScreen
 import com.example.lbc_test_album_titles.ui.theme.Lbc_test_album_titlesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Simple Main Activity with BaseScreen Composable
+ */
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
