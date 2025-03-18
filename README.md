@@ -39,6 +39,9 @@ The project follows a **Clean Architecture** with separate layers for data, doma
 
 Unit tests are written using JUnit and Mockito. The repository class is tested for both local (Room) and remote (API) data fetching.
 
+## TODOs : 
+Make Better Error Handling Functionalities 
+
 ## License
 
 This project is licensed under the MIT License.
