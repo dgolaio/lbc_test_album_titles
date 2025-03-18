@@ -1,6 +1,9 @@
 # LBC Test Album Titles
 
-This project is an example of how to consume an API to fetch a list of albums, store them locally using Room, and display them in an Android interface using Jetpack Compose. The architecture used in the project is based on the **MVVM** and **Clean Architecture** patterns.
+This project is an example of how to consume an API to fetch a list of albums, store them locally using Room, and display them in an Android interface using Jetpack Compose. The architecture used in the project is based on the **MVVM** and 
+**Clean Architecture** patterns.
+
+# Check Out LBC_Explanation_Document For more Info
 
 ## Technologies Used
 
