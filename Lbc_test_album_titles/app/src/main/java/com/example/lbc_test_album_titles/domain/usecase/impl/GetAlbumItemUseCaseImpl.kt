@@ -23,5 +23,4 @@ class GetAlbumItemUseCaseImpl @Inject constructor(
 
         return albumEntities
     }
-
 }

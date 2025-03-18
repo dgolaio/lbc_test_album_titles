@@ -19,7 +19,10 @@ coilVers = "2.6.0"
 roomVersion = "2.6.1"
 ksp = "2.0.21-1.0.27"
 swipeRefreshVersion = "0.34.0"
-material = "1.3.0-beta04"
+mockitoVersion = "5.16.1"
+truthVersion = "1.4.4"
+kotlinCoroutinesTestVersion = "1.6.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,7 +54,9 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersi
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion"}
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion"}
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "swipeRefreshVersion" }
-androidx-material = { group = "androidx.compose.material", name = "material" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoVersion"}
+truth = { module = "com.google.truth:truth", version.ref = "truthVersion" }
+kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutinesTestVersion"}
 
 
 
